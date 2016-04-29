@@ -5,7 +5,7 @@ serviceComposer.compose([
   {
         name: 'images',
         version: 1,
-        matcher: 'https://www.apod.io/images',
+        matcher: 'https://stabenfeldt.github.io/images',
         type: serviceComposer.types.CACHE_ALWAYS
     },
     {
