@@ -1,6 +1,18 @@
 importScripts('serviceworker-cache-polyfill.js');
 importScripts('service-composer.js');
 
+function prefetchImages(response) {
+    response.json().then(function(json) {
+        var urls = json.map(function(obj) {
+            return obj.localImages.medPath;
+        });
+
+        caches.open('images-1').then(function(cache) {
+            cache.addAll(urls);
+        });
+    });
+}
+
 serviceComposer.compose([
   {
         name: 'images',
@@ -20,14 +32,3 @@ serviceComposer.compose([
     }
 ]);
 
-function prefetchImages(response) {
-    response.json().then(function(json) {
-        var urls = json.map(function(obj) {
-            return obj.localImages.medPath;
-        });
-
-        caches.open('images-1').then(function(cache) {
-            cache.addAll(urls);
-        });
-    });
-}
